@@ -1,0 +1,3 @@
+class Share
+
+end
