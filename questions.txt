@@ -1,0 +1,10 @@
+kaip testuoti laika
+ar reikia testuoti kitu padarytas nuorodų validacijos "bibliotekas"
+ruby versijos, kodel atskirai 1.9 ir 2.+
+Kokia duomenu struktura naudoti (santykis daug su daug)
+	hash raktas nuoroda => zymos
+	hash raktas  zyma => nuorodos
+	array of arrays
+Kaip isaugoti duomenis tarp sesiju
+ka reiskia 
+	%q %Q %s (ar tai metodai)
