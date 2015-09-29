@@ -8,7 +8,7 @@ class Bookmark
   attr_accessor :name, :link
 
   def to_s
-    "#@name -> #@link at: #@time.inspect"
+    "#{@name} -> #{@link} at: #{@time.inspect}"
   end
 end
 

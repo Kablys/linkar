@@ -8,3 +8,6 @@ Kokia duomenu struktura naudoti (santykis daug su daug)
 Kaip isaugoti duomenis tarp sesiju
 ka reiskia 
 	%q %Q %s (ar tai metodai)
+Projekto skeletas
+	pvz su gem
+
