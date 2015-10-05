@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'bundler/setup'
+
 require './Bookmark.rb'
 mark = Bookmark.new('www.google.com', 'Google')
 barray = []
