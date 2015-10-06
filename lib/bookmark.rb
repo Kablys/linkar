@@ -21,9 +21,9 @@ class Bookmark
     attr_reader :num_of_bookmarks
   end
 
-  #  def self.num_of_bookmarks
-  #    @num_of_bookmarks
-  #  end
+  # def self.num_of_bookmarks
+  #   @num_of_bookmarks
+  # end
 
   attr_accessor :name, :link
   attr_reader :time, :tags

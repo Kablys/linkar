@@ -57,6 +57,7 @@ describe Bookmark do
 
   describe '#rename_tag' do
     context 'gets two strings with names' do
+
       it 'renames tag (of first string name) with second string' do
         @bookmark.rename_tag 'first', 'uno'
         expect(@bookmark.tags).to eql %w(uno example)
@@ -73,6 +74,7 @@ describe Bookmark do
     context 'there being two bookmark object' do
       it 'returns 2' do
         second_bookmark = Bookmark.new 'www.ruby-lang.org/', 'Ruby Language'
+        expect(second_bookmark).to be_an_instance_of(Bookmark)
         expect(Bookmark.num_of_bookmarks).to eql 2
       end
     end
