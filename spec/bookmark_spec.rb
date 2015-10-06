@@ -57,7 +57,6 @@ describe Bookmark do
 
   describe '#rename_tag' do
     context 'gets two strings with names' do
-
       it 'renames tag (of first string name) with second string' do
         @bookmark.rename_tag 'first', 'uno'
         expect(@bookmark.tags).to eql %w(uno example)
