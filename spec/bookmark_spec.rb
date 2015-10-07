@@ -3,38 +3,32 @@ require 'spec_helper'
 describe Bookmark do
   before :all do
     @bookmark = Bookmark.new('www.example.com',
-                             'Website title',
+                             'Bookmark name',
                              %w(first example))
   end
 
-  describe '#new' do
-    it 'takes 3 parameters and returns a Bookmark object' do
-      expect(@bookmark).to be_an_instance_of Bookmark
-    end
-  end
-
   describe '#name' do
-    it 'returns the correct name' do
-      expect(@bookmark.name).to eql 'Website title'
+    it 'returns the name of bookmark' do
+      expect(@bookmark.name).to eql 'Bookmark name'
     end
   end
 
   describe '#link' do
-    it 'returns the correct link' do
+    it 'returns the bookmarks link' do
       expect(@bookmark.link).to eql 'www.example.com'
     end
   end
 
   describe '#tags' do
-    it 'returns array of tags' do
+    it 'returns bookmarks array of tags' do
       expect(@bookmark.tags).to eql %w(first example)
     end
   end
 
   describe '#add_tag' do
-    context 'something other thant string supplied as a tag' do
+    context 'something other thant single string supplied as a tag' do
       it 'does nothing' do
-        @bookmark.add_tag 4
+        @bookmark.add_tag :not_string
         expect(@bookmark.tags).to eql %w(first example)
       end
     end
@@ -49,6 +43,12 @@ describe Bookmark do
   describe '#del_tag' do
     context 'name of to tag to be deleted given' do
       it 'removes that tag' do
+        @bookmark.del_tag :not_string
+        expect(@bookmark.tags).to eql %w(first example third)
+      end
+    end
+    context 'name of to tag to be deleted given' do
+      it 'removes that tag' do
         @bookmark.del_tag 'third'
         expect(@bookmark.tags).to eql %w(first example)
       end
@@ -57,7 +57,6 @@ describe Bookmark do
 
   describe '#rename_tag' do
     context 'gets two strings with names' do
-
       it 'renames tag (of first string name) with second string' do
         @bookmark.rename_tag 'first', 'uno'
         expect(@bookmark.tags).to eql %w(uno example)
@@ -73,8 +72,7 @@ describe Bookmark do
     end
     context 'there being two bookmark object' do
       it 'returns 2' do
-        second_bookmark = Bookmark.new 'www.ruby-lang.org/', 'Ruby Language'
-        expect(second_bookmark).to be_an_instance_of(Bookmark)
+        Bookmark.new 'www.ruby-lang.org/', 'Ruby Language'
         expect(Bookmark.num_of_bookmarks).to eql 2
       end
     end
@@ -82,7 +80,7 @@ describe Bookmark do
 
   describe '#to_s' do
     it 'returns correctly formatted string' do
-      expect(@bookmark.to_s).to eql 'Website title -> www.example.com'
+      expect(@bookmark.to_s).to eql 'Bookmark name -> www.example.com'
     end
   end
 end

@@ -33,7 +33,7 @@ class Bookmark
   end
 
   def del_tag(name)
-    @tags.delete(name)
+    @tags.delete(name) if name.is_a? String
   end
 
   def rename_tag(name, new_name)
