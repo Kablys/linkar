@@ -1,32 +1,36 @@
 # Class for handling Bookmarks
 class Bookmark
-  @num_of_bookmarks = 0 # should interact with Stat
   def initialize(link, name = '', tags = [])
-    # TODO: link validation
-    @link = link
-    # TODO: if no name is supplied use website title
-    @name = name
-    @time = Time.now # same as Time.new
-    @tags = tags
+    @link = (link)
+    if @link
+      # TODO: if no name is supplied use website title
+      @name = name
+      @time = Time.now # same as Time.new
+      @tags = tags
+    end
   end
 
-  # REVIEW: is this proper class instance variable implementation
+  attr_accessor :name
+  attr_reader :time, :tags, :link, :protocol, :domain, :top_domain
 
-  def self.new(link, name = '', tags = [])
-    @num_of_bookmarks += 1
-    super
+  def link= (link)
+    if result = self.class.parse_link(link)
+      @protocol = result[1]
+      @domain = result[3]
+      @top_domain = result[5]
+      return @link = link
+    else
+      return  nil
+    end
   end
 
-  class << self
-    attr_reader :num_of_bookmarks
+  def self.parse_link (link)
+    /^([a-z]+:\/\/)?    #protocol
+      (www\.)?          #www
+      (([a-z0-9-]+\.)+([a-zA-Z]+)) #domain
+      (\/.*)?$ #filepath
+    /x.match(link) #option x allows to use whitespace in regexp
   end
-
-  # def self.num_of_bookmarks
-  #   @num_of_bookmarks
-  # end
-
-  attr_accessor :name, :link
-  attr_reader :time, :tags
 
   def add_tag(tag)
     @tags << tag if tag.is_a? String

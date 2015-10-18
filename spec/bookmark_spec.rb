@@ -19,6 +19,24 @@ describe Bookmark do
     end
   end
 
+  describe '#domain' do
+    it 'returns the bookmarks domain' do
+      expect(@bookmark.domain).to eql 'example.com'
+    end
+  end
+
+  describe '#protocol' do
+    it 'returns the bookmarks protocol' do
+      expect(@bookmark.protocol).to be_nil
+    end
+  end
+
+  describe '#top_domain' do
+    it 'returns the bookmarks top level domain' do
+      expect(@bookmark.top_domain).to eql 'com'
+    end
+  end
+
   describe '#tags' do
     it 'returns bookmarks array of tags' do
       expect(@bookmark.tags).to eql %w(first example)
@@ -60,20 +78,6 @@ describe Bookmark do
       it 'renames tag (of first string name) with second string' do
         @bookmark.rename_tag 'first', 'uno'
         expect(@bookmark.tags).to eql %w(uno example)
-      end
-    end
-  end
-
-  describe '.num_of_bookmarks' do
-    context 'there being only one bookmark object' do
-      it 'returns 1' do
-        expect(Bookmark.num_of_bookmarks).to eql 1
-      end
-    end
-    context 'there being two bookmark object' do
-      it 'returns 2' do
-        Bookmark.new 'www.ruby-lang.org/', 'Ruby Language'
-        expect(Bookmark.num_of_bookmarks).to eql 2
       end
     end
   end
