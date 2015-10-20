@@ -1,9 +1,10 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require './Bookmark.rb'
+require_relative '../lib/bookmark'
 mark = Bookmark.new('www.google.com', 'Google')
-barray = []
-barray.push Bookmark.new('www.com.com', 'dude')
-barray.push mark
-barray.each { |l| puts l }
+puts mark.link
+# barray = []
+# barray.push Bookmark.new('www.com.com', 'dude')
+# barray.push mark
+# barray.each { |l| puts l }

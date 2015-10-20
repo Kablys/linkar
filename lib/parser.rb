@@ -2,9 +2,8 @@
 class Parser
   def initialize
   end
-  def self.parse_link link
-    if link.empty?
-      return
-    end
+
+  def self.parse_link(link)
+    return if link.empty?
   end
 end

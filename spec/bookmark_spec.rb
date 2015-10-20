@@ -4,7 +4,7 @@ describe Bookmark do
   before :all do
     @bookmark = Bookmark.new('www.example.com',
                              'Bookmark name',
-                             %w(first example))
+                             %i(first example))
   end
 
   describe '#name' do
@@ -37,38 +37,62 @@ describe Bookmark do
     end
   end
 
+  describe '#parse_link' do
+    subject(:link_part) do
+      @bookmark.parse_link('http://www.betterspecs.org/#subject')
+    end
+    it do
+      # REVIEW: Kur galima newline naudoti
+      # (po to galiu ideti kelis space, bet ne \n)
+      expect(link_part.to_a).to match_array([
+        'http://www.betterspecs.org/#subject',
+        'http://',
+        'www.',
+        'betterspecs.org',
+        'betterspecs.',
+        'org',
+        '/#subject'])
+    end
+    # it { expect(link_part[1]).to eql('http://') }
+    # it { expect(link_part[2]).to eql('www.') }
+    # it { expect(link_part[3]).to eql('betterspecs.org') }
+    # it { expect(link_part[4]).to eql('betterspecs.') }
+    # it { expect(link_part[5]).to eql('org') }
+    # it { expect(link_part[6]).to eql('/#subject') }
+  end
+
   describe '#tags' do
     it 'returns bookmarks array of tags' do
-      expect(@bookmark.tags).to eql %w(first example)
+      expect(@bookmark.tags).to eql %i(first example)
     end
   end
 
   describe '#add_tag' do
-    context 'something other thant single string supplied as a tag' do
+    context 'something other thant single symbol supplied as a tag' do
       it 'does nothing' do
-        @bookmark.add_tag :not_string
-        expect(@bookmark.tags).to eql %w(first example)
+        @bookmark.add_tag 'not symbol'
+        expect(@bookmark.tags).to eql %i(first example)
       end
     end
-    context 'one string is suplied as a tag' do
+    context 'one symbol is suplied as a tag' do
       it 'adds tag to tag array' do
-        @bookmark.add_tag 'third'
-        expect(@bookmark.tags).to eql %w(first example third)
+        @bookmark.add_tag :third
+        expect(@bookmark.tags).to eql %i(first example third)
       end
     end
   end
 
   describe '#del_tag' do
-    context 'name of to tag to be deleted given' do
+    context 'name of non exsiting tag to be deleted given' do
       it 'removes that tag' do
-        @bookmark.del_tag :not_string
-        expect(@bookmark.tags).to eql %w(first example third)
+        @bookmark.del_tag 'not symbol'
+        expect(@bookmark.tags).to eql %i(first example third)
       end
     end
     context 'name of to tag to be deleted given' do
       it 'removes that tag' do
-        @bookmark.del_tag 'third'
-        expect(@bookmark.tags).to eql %w(first example)
+        @bookmark.del_tag :third
+        expect(@bookmark.tags).to eql %i(first example)
       end
     end
   end
@@ -76,8 +100,8 @@ describe Bookmark do
   describe '#rename_tag' do
     context 'gets two strings with names' do
       it 'renames tag (of first string name) with second string' do
-        @bookmark.rename_tag 'first', 'uno'
-        expect(@bookmark.tags).to eql %w(uno example)
+        @bookmark.rename_tag :first, :uno
+        expect(@bookmark.tags).to eql %i(uno example)
       end
     end
   end
