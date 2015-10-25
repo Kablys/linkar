@@ -7,16 +7,17 @@ class Bookmark
     return unless @link
     # TODO: if no name is supplied use website title
     @name = name
-    @time = Time.now # same as Time.new
+    #@time = Time.now # same as Time.new
     @tags = tags
   end
 
   def link=(link)
-    result = parse_link link
+    result = self.class.parse_link link
     return unless result
-    @protocol = result[1]
-    @domain = result[3]
-    @top_domain = result[5]
+    @link_parts = [result[1], result[2], result[4], result[5], result[6]]
+    # @protocol = result[1]
+    # @domain = result[3]
+    # @top_domain = result[5]
     @link = link
     #  REVIEW: What is an adventage of guard clause
     # if result
@@ -27,7 +28,7 @@ class Bookmark
     # end
   end
 
-  def parse_link(link)
+  def self.parse_link(link)
     %r{\A([a-z]+:\/\/)?    #protocol
       (www\.)?
       (                 #domain name
@@ -37,8 +38,6 @@ class Bookmark
     }x.match(link)
   end
 
-  attr_accessor :name
-  attr_reader :time, :tags, :link, :protocol, :domain, :top_domain
 
   def add_tag(tag)
     @tags << tag if tag.is_a? Symbol
@@ -49,7 +48,7 @@ class Bookmark
   end
 
   def rename_tag(name, new_name)
-    return unless (name.is_a? Symbol) && (name.is_a? Symbol)
+    return unless (new_name.is_a? Symbol) && (name.is_a? Symbol)
     index = @tags.index(name)
     @tags[index] = new_name
   end

@@ -19,39 +19,41 @@ describe Bookmark do
     end
   end
 
-  describe '#domain' do
-    it 'returns the bookmarks domain' do
-      expect(@bookmark.domain).to eql 'example.com'
-    end
-  end
+  #describe '#domain' do
+  #  it 'returns the bookmarks domain' do
+  #    expect(@bookmark.domain).to eql 'example.com'
+  #  end
+  #end
 
-  describe '#protocol' do
-    it 'returns the bookmarks protocol' do
-      expect(@bookmark.protocol).to be_nil
-    end
-  end
+  #describe '#protocol' do
+  #  it 'returns the bookmarks protocol' do
+  #    expect(@bookmark.protocol).to be_nil
+  #  end
+  #end
 
-  describe '#top_domain' do
-    it 'returns the bookmarks top level domain' do
-      expect(@bookmark.top_domain).to eql 'com'
-    end
-  end
+  #describe '#top_domain' do
+  #  it 'returns the bookmarks top level domain' do
+  #    expect(@bookmark.top_domain).to eql 'com'
+  #  end
+  #end
 
-  describe '#parse_link' do
+  describe '.parse_link' do
     subject(:link_part) do
-      @bookmark.parse_link('http://www.betterspecs.org/#subject')
+      Bookmark.parse_link('http://www.betterspecs.org/#subject')
     end
-    it do
-      # REVIEW: Kur galima newline naudoti
-      # (po to galiu ideti kelis space, bet ne \n)
-      expect(link_part.to_a).to match_array([
-        'http://www.betterspecs.org/#subject',
-        'http://',
-        'www.',
-        'betterspecs.org',
-        'betterspecs.',
-        'org',
-        '/#subject'])
+    context 'Given correct link' do
+      it 'it returns correct' do
+        # REVIEW: Kur galima newline naudoti
+        # (po to galiu ideti kelis space, bet ne \n)
+        expect(link_part.to_a).to match_array([
+          'http://www.betterspecs.org/#subject',
+          'http://',
+          'www.',
+          'betterspecs.org',
+          'betterspecs.',
+          'org',
+          '/#subject'])
+      end
     end
     # it { expect(link_part[1]).to eql('http://') }
     # it { expect(link_part[2]).to eql('www.') }
@@ -59,6 +61,14 @@ describe Bookmark do
     # it { expect(link_part[4]).to eql('betterspecs.') }
     # it { expect(link_part[5]).to eql('org') }
     # it { expect(link_part[6]).to eql('/#subject') }
+    context 'Given incorrect link' do
+      it 'it returns nil' do
+        # REVIEW: Kur galima newline naudoti
+        # (po to galiu ideti kelis space, bet ne \n)
+        bad_link = 'http:/www.betterspecs.org/#subject'
+        expect(Bookmark.parse_link(bad_link)).to eql nil
+      end
+    end
   end
 
   describe '#tags' do

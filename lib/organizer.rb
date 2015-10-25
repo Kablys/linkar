@@ -14,9 +14,9 @@ class Organizer
     end
   end
 
-  def get_bookmarks(bookmark = nil)
+  def bookmarks(bookmark = '')
     case bookmark
-    when nil
+    when ''
       @book_arr
     when String
       @book_arr[@book_arr.index(bookmark)]
@@ -29,13 +29,13 @@ class Organizer
   def add_tag
   end
 
-  def get_tags
+  def tags
     @tag_hash
   end
 
   def remove_tag
   end
 
-  def get_stats
+  def stats
   end
 end
