@@ -1,4 +1,4 @@
-require 'bookmark'
+require_relative 'bookmark'
 
 # Class resposnbile for organizing bookmarks
 class Organizer

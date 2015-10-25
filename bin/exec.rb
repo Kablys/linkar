@@ -7,7 +7,7 @@ mark = Bookmark.new('www.google.com', 'Google')
                          'Bookmark name',
                          %i(first example))
 @bookmark.add_tag :hai
-puts mark.link
+puts mark
 # barray = []
 # barray.push Bookmark.new('www.com.com', 'dude')
 # barray.push mark
