@@ -9,7 +9,8 @@ class Bookmark
     @name = name
     @tags = tags
   end
-
+  attr_accessor :name
+  attr_reader :tags, :link
   def add_tag(tag)
     @tags << tag if tag.is_a? Symbol
   end
@@ -22,6 +23,10 @@ class Bookmark
     return unless (new_name.is_a? Symbol) && (name.is_a? Symbol)
     index = @tags.index(name)
     @tags[index] = new_name
+  end
+
+  def link
+    @link.to_s
   end
 
   def to_s

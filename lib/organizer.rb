@@ -1,6 +1,6 @@
 require_relative 'bookmark'
 
-# Class resposnbile for organizing bookmarks
+# Class responsible for organizing bookmarks
 class Organizer
   def initialize
     @book_arr = []
@@ -16,10 +16,15 @@ class Organizer
 
   def bookmarks(bookmark = '')
     case bookmark
-    when ''
-      @book_arr
-    when String
-      @book_arr[@book_arr.index(bookmark)]
+      when ''
+        @book_arr
+      when String
+        @book_arr[@book_arr.index(bookmark)]
+      when Symbol
+        @tag_hash
+      else
+        @book_arr
+
     end
   end
 

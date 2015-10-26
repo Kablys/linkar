@@ -9,4 +9,5 @@ class Parser
       (\/.*)?\z #filepath
     }x.match(link)
   end
+
 end
