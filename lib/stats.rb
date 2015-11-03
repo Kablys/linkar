@@ -1,5 +1,8 @@
 require_relative 'organizer'
 
-# Returns statisics about system
+# Returns statistics about system
 class Stats
+  def self.book_num(org)
+    org.bookmarks.size
+  end
 end
