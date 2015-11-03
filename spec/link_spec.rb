@@ -10,10 +10,10 @@ describe Link do
         expect(good_link.link).to eql 'http://www.betterspecs.org/#subject'
       end
       it 'it gets correct link parts' do
-        expect(good_link.parts).to include(protocol: 'http://',
-                                           subdomain: 'betterspecs.',
-                                           top_level_domain: 'org',
-                                           filepath: '/#subject')
+        expect(good_link.parts).to match_array(protocol: 'http://',
+                                              subdomain: 'betterspecs.',
+                                              top_level_domain: 'org',
+                                              filepath: '/#subject')
       end
     end
   end

@@ -85,11 +85,40 @@ describe Organizer do
   end
 
   describe '#bookmarks' do
-    context 'get single bookmark by name' do
+    let(:test_book) { Bookmark.new('test.com', 'test', [:first]) }
+    let(:test_book2) { Bookmark.new('test2.com', 'test2', [:second]) }
+    subject(:org) do
+      Organizer.new
     end
-    context 'get all bookmars with same tag' do
+    context 'get all bookmarks' do
+      it do
+        org.add_bookmarks test_book
+        org.add_bookmarks test_book2
+        expect(org.bookmarks).to eql [test_book, test_book2]
+      end
     end
-    context 'get all bookmars with from same domain' do
+    context 'get bookmark by index' do
+      it do
+        num = 5
+        num.times do |n|
+          org.add_bookmarks Bookmark.new("temp#{n}.com", "temp#{n}", [:temp])
+        end
+        org.add_bookmarks test_book
+        expect(org.bookmarks num).to eql (test_book)
+      end
+    end
+    context 'get all bookmarks with same tag' do
+      it do
+        org.add_bookmarks test_book
+        expect(org.bookmarks :first).to eql [test_book]
+      end
+    end
+    context 'given wrong argument' do
+      it do
+        arg = ['bad']
+        output = "Wrong argument #{arg}\n" # to fit 80 char limit
+        expect { org.bookmarks arg }.to output(output).to_stdout
+      end
     end
   end
 end

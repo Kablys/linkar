@@ -25,13 +25,15 @@ class Organizer
     case bookmark
     when ''
       @book_arr
-    when String
-      @book_arr[@book_arr.index(bookmark)]
-    when Symbol
+    when Fixnum
+      @book_arr[bookmark]
+    when Symbol # Return array of values
       @tag_hash[bookmark]
+    # REVIEW What's the point
+    # when Bookmark
+    #   @book_arr[@book_arr.index(bookmark)]
     else
-      @book_arr
-
+      puts "Wrong argument #{bookmark}"
     end
   end
 
