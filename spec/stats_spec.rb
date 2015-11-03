@@ -1,22 +1,27 @@
 require 'spec_helper'
 
 describe Stats do
-  describe '#Bookmark' do
-    subject(:org) do
-      Organizer.new
-    end
+  subject(:org) do
+    Organizer.new
+  end
+
+  describe '.book_num' do
     context 'get total number of bookmarks' do
       it do
         num = 5
-        num.times {org.add_bookmarks Bookmark.new('www.test.com')}
+        num.times { org.add_bookmarks Bookmark.new('www.test.com') }
         expect(Stats.book_num(org)).to eql 5
       end
       it 'Adding 1 bookmark increases value by 1' do
         num = 5
-        num.times{org.add_bookmarks Bookmark.new('www.test.com')}
-        expect{org.add_bookmarks Bookmark.new('www.test.com')}.to change{Stats.book_num(org)}.from(5).to(6)
+        num.times { org.add_bookmarks Bookmark.new('www.test.com') }
+        expect do
+          org.add_bookmarks Bookmark.new('www.test.com')
+        end.to change { Stats.book_num(org) }.from(5).to(6)
       end
     end
+  end
+  describe '.tag_num' do
     context 'get total number of tags' do
       it 'Adding 1 bookmark increases value by 1' do
         num = 3
@@ -24,7 +29,8 @@ describe Stats do
         num.times do |n|
           org.add_bookmarks Bookmark.new('test.com', 't', [tags[n]])
         end
-        expect{org.add_bookmarks Bookmark.new('test.com', 't', [:test])}.to change{Stats.tag_num(org)}.from(3).to(4)
+        proc = -> { org.add_bookmarks Bookmark.new('test.com', 't', [:test]) }
+        expect(&proc).to change { Stats.tag_num(org) }.from(3).to(4)
       end
     end
     context 'get total number of bookmarks with same tag' do
@@ -33,7 +39,7 @@ describe Stats do
         num.times do |n|
           org.add_bookmarks Bookmark.new("test#{n}.com", "t#{n}", [:test])
         end
-        expect{org.add_bookmarks Bookmark.new('test.com', 't', [:test])}.to change{Stats.tag_num(org)}.from(3).to(4)
+        expect(Stats.tag_num(org, :test)).to eql 3
       end
     end
     context 'get total number of bookmarks from same domain' do

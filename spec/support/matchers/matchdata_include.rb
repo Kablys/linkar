@@ -9,7 +9,7 @@ require 'rspec/expectations'
 #                                                  betterspecs.
 #                                                  org
 #                                                  /#subject))
-RSpec::Matchers.define :matchData_include do |*expected|
+RSpec::Matchers.define :matchdata_include do |*expected|
   match do |actual|
     actual.to_a == (expected)
   end

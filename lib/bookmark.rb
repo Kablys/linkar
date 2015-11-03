@@ -5,8 +5,9 @@ class Bookmark
   def initialize(link, name = '', tags = [])
     @link = Link.new(link)
     return unless @link
-    # TODO: if no name is supplied use website title
-    @name = name
+    # TOD
+    # O: if no name is supplied use website title
+    self.name = name
     @tags = tags
   end
   attr_reader :tags, :link, :name
@@ -14,7 +15,10 @@ class Bookmark
     @tags << tag if tag.is_a? Symbol
   end
 
-  attr_writer :name
+  def name=(name)
+    return '' unless name.ascii_only?
+    @name = name
+  end
 
   def del_tag(name)
     @tags.delete(name) if name.is_a? Symbol

@@ -14,12 +14,12 @@ require_relative '../lib/organizer'
 org = Organizer.new
 loop do
   puts '1. Add bookmark'
-  puts '2. Remove bookmark'
+  # puts '2. Remove bookmark'
   puts '3. Print bookmark'
   puts '4. Print tags'
   puts '5. Save bookmarks'
   puts '6. Load bookmarks'
-  puts '7. Sort bookmarks'
+  # puts '7. Sort bookmarks'
   puts 'q. Exit program'
 
   command = gets.chomp
@@ -34,7 +34,7 @@ loop do
     temp = temp.scan(/\w+/)
     print temp.to_s + "\n"
     org.add_bookmarks(Bookmark.new(link.chomp!,name.chomp!,temp))
-  when '2'
+  # when '2'
   when '3'
     org.bookmarks.each_with_index do |book, index|
       puts index.to_s + '. ' + book.to_s
@@ -50,7 +50,7 @@ loop do
     rescue ArgumentError => e
       puts "Could not parse YAML: #{e.message}"
     end
-  when '7'
+  #when '7' # Sort bookmarks
   when 'q'
     puts 'Goodbye'
     exit

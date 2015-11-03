@@ -6,7 +6,7 @@ class Parser
       (                   #domain name
         (([a-z0-9-]+\.)+) #subdomain
         ([a-zA-Z]+))      #top level domain
-      (\/.*)?\z #filepath
+      (\/\S*)?\z #filepath
     }x.match(link)
   end
   # def self.parse_title(website)

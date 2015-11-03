@@ -11,9 +11,9 @@ describe Link do
       end
       it 'it gets correct link parts' do
         expect(good_link.parts).to match_array(protocol: 'http://',
-                                              subdomain: 'betterspecs.',
-                                              top_level_domain: 'org',
-                                              filepath: '/#subject')
+                                               subdomain: 'betterspecs.',
+                                               top_level_domain: 'org',
+                                               filepath: '/#subject')
       end
     end
   end

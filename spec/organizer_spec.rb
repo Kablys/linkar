@@ -104,7 +104,7 @@ describe Organizer do
           org.add_bookmarks Bookmark.new("temp#{n}.com", "temp#{n}", [:temp])
         end
         org.add_bookmarks test_book
-        expect(org.bookmarks num).to eql (test_book)
+        expect(org.bookmarks num).to eql(test_book)
       end
     end
     context 'get all bookmarks with same tag' do

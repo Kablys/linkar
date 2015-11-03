@@ -29,7 +29,7 @@ class Organizer
       @book_arr[bookmark]
     when Symbol # Return array of values
       @tag_hash[bookmark]
-    # REVIEW What's the point
+    # REVIEW: What's the point
     # when Bookmark
     #   @book_arr[@book_arr.index(bookmark)]
     else
