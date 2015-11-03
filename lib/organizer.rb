@@ -14,33 +14,41 @@ class Organizer
     end
   end
 
-  def bookmarks(bookmark = '')
-    case bookmark
-      when ''
-        @book_arr
-      when String
-        @book_arr[@book_arr.index(bookmark)]
-      when Symbol
-        @tag_hash
-      else
-        @book_arr
-
+  def remove_bookmark(bookmark)
+    return unless @book_arr.delete(bookmark)
+    bookmark.tags.each do |tag|
+      @tag_hash[tag] = @tag_hash[tag] - [bookmark]
     end
   end
 
-  def remove_bookmarks
-  end
+  def bookmarks(bookmark = '')
+    case bookmark
+    when ''
+      @book_arr
+    when String
+      @book_arr[@book_arr.index(bookmark)]
+    when Symbol
+      @tag_hash[bookmark]
+    else
+      @book_arr
 
-  def add_tag
+    end
   end
 
   def tags
     @tag_hash
   end
 
-  def remove_tag
+  # Use Bookmark array index
+  # Range
+  # Int
+  def add_tag
   end
 
-  def stats
+  def remove_tag(tag)
+    return unless @tag_hash.delete(tag)
+    @book_arr.each do |bookmark|
+      bookmark.del_tag(tag)
+    end
   end
 end

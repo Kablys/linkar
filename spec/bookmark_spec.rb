@@ -32,7 +32,7 @@ describe Bookmark do
         expect(@bookmark.tags).to eql %i(first example)
       end
     end
-    context 'one symbol is suplied as a tag' do
+    context 'one symbol is supplied as a tag' do
       it 'adds tag to tag array' do
         @bookmark.add_tag :third
         expect(@bookmark.tags).to eql %i(first example third)
@@ -41,7 +41,7 @@ describe Bookmark do
   end
 
   describe '#del_tag' do
-    context 'name of non exsiting tag to be deleted given' do
+    context 'name of none existing tag to be deleted given' do
       it 'removes that tag' do
         @bookmark.del_tag 'not symbol'
         expect(@bookmark.tags).to eql %i(first example third)
@@ -66,7 +66,7 @@ describe Bookmark do
 
   describe '#to_s' do
     it 'returns correctly formatted string' do
-      expect(@bookmark.to_s).to eql 'Bookmark name -> www.example.com'
+      expect(@bookmark.to_s).to eql 'Bookmark name www.example.com'
     end
   end
 end

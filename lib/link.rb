@@ -10,21 +10,17 @@ class Link
     result = Parser.parse_link link
     return unless result
     @link = link
-    @parts = to_h(result)
+    @parts = self.class.to_h(result)
   end
 
   def to_s
     "#{@link}"
   end
 
-  private
-
-  def to_h(md) # Match_data object to hash
+  def self.to_h(md) # Match_data object to hash
     [[:protocol, md[1]],
      [:subdomain, md[4]],
-     [:top_level_domain, md[5]],
-     [:filepath, md[6]]].to_h
+     [:top_level_domain, md[6]],
+     [:filepath, md[7]]].to_h
   end
-
-
 end

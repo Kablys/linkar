@@ -9,11 +9,12 @@ class Bookmark
     @name = name
     @tags = tags
   end
-  attr_accessor :name
-  attr_reader :tags, :link
+  attr_reader :tags, :link, :name
   def add_tag(tag)
     @tags << tag if tag.is_a? Symbol
   end
+
+  attr_writer :name
 
   def del_tag(name)
     @tags.delete(name) if name.is_a? Symbol
@@ -30,6 +31,6 @@ class Bookmark
   end
 
   def to_s
-    "#{@name} -> #{@link}"
+    "#{@name} #{@link}"
   end
 end
