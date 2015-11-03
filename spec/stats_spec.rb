@@ -21,13 +21,20 @@ describe Stats do
       it 'Adding 1 bookmark increases value by 1' do
         num = 3
         tags = %i(first second third)
-        num.times do
-          org.add_bookmarks Bookmark.new('test.com', 't', tags[num - 1])
+        num.times do |n|
+          org.add_bookmarks Bookmark.new('test.com', 't', [tags[n]])
         end
-        expect{org.add_bookmarks Bookmark.new('test.com', 't', :test)}.to change{Stats.tag_num(org)}.from(3).to(4)
+        expect{org.add_bookmarks Bookmark.new('test.com', 't', [:test])}.to change{Stats.tag_num(org)}.from(3).to(4)
       end
     end
     context 'get total number of bookmarks with same tag' do
+      it do
+        num = 3
+        num.times do |n|
+          org.add_bookmarks Bookmark.new("test#{n}.com", "t#{n}", [:test])
+        end
+        expect{org.add_bookmarks Bookmark.new('test.com', 't', [:test])}.to change{Stats.tag_num(org)}.from(3).to(4)
+      end
     end
     context 'get total number of bookmarks from same domain' do
     end
