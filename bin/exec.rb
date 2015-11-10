@@ -31,7 +31,8 @@ loop do
     name = gets
     puts 'list of tags (separated by \' \')'
     temp = gets
-    temp = temp.scan(/\w+/)
+    #Converts string into array of one word strings and then to array of symbols
+    temp = temp.scan(/\w+/).map{ |word| word.to_sym }
     print temp.to_s + "\n"
     org.add_bookmarks(Bookmark.new(link.chomp!,name.chomp!,temp))
   # when '2'
@@ -45,7 +46,7 @@ loop do
   when '5' # Save bookmarks
     org.export('data.yml')
   when '6' # Load bookmarks
-    org = Organizer.inport('data.yml')
+    org = Organizer.import('data.yml')
   #when '7' # Sort bookmarks
   when 'q'
     puts 'Goodbye'

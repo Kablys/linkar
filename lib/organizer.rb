@@ -56,13 +56,12 @@ class Organizer
   end
 
   def export(file_path)
-    File.open(file_path, 'w') {|f| f.write(self.to_yaml)}
+    File.open(file_path, 'w') { |file| file.write(to_yaml) }
   end
-  def self.inport(file_path)
-    begin
-      YAML.load(File.open(file_path, 'r'))
-    rescue ArgumentError => e
-      puts "Could not parse YAML: #{e.message}"
-    end
+
+  def self.import(file_path)
+    YAML.load(File.open(file_path, 'r'))
+    # rescue SyntaxError => error
+    #  puts "Could not parse YAML: #{error.message}"
   end
 end
