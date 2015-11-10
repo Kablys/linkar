@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'yaml'
+
 require 'bundler/setup'
 
 require_relative '../lib/organizer'
@@ -43,13 +43,9 @@ loop do
   when '4'
     puts org.tags
   when '5' # Save bookmarks
-    File.open('data.yml', 'w') {|f| f.write(org.to_yaml)}
+    org.export('data.yml')
   when '6' # Load bookmarks
-    org = begin
-      YAML.load(File.open('data.yml', 'r'))
-    rescue ArgumentError => e
-      puts "Could not parse YAML: #{e.message}"
-    end
+    org = Organizer.inport('data.yml')
   #when '7' # Sort bookmarks
   when 'q'
     puts 'Goodbye'

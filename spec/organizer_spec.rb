@@ -117,7 +117,7 @@ describe Organizer do
       it do
         arg = ['bad']
         output = "Wrong argument #{arg}\n" # to fit 80 char limit
-        expect { org.bookmarks arg }.to output(output).to_stdout
+        expect { org.bookmarks arg }.to output(output).to_stderr
       end
     end
   end

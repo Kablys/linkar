@@ -1,4 +1,5 @@
 require_relative 'bookmark'
+require 'yaml'
 
 # Class responsible for organizing bookmarks
 class Organizer
@@ -33,7 +34,7 @@ class Organizer
     # when Bookmark
     #   @book_arr[@book_arr.index(bookmark)]
     else
-      puts "Wrong argument #{bookmark}"
+      $stderr.puts "Wrong argument #{bookmark}"
     end
   end
 
@@ -51,6 +52,17 @@ class Organizer
     return unless @tag_hash.delete(tag)
     @book_arr.each do |bookmark|
       bookmark.del_tag(tag)
+    end
+  end
+
+  def export(file_path)
+    File.open(file_path, 'w') {|f| f.write(self.to_yaml)}
+  end
+  def self.inport(file_path)
+    begin
+      YAML.load(File.open(file_path, 'r'))
+    rescue ArgumentError => e
+      puts "Could not parse YAML: #{e.message}"
     end
   end
 end
