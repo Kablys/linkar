@@ -47,6 +47,7 @@ loop do
     org.export('data.yml')
   when '6' # Load bookmarks
     org = Organizer.import('data.yml')
+      # REVIEW add exeptcion
   #when '7' # Sort bookmarks
   when 'q'
     puts 'Goodbye'

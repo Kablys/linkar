@@ -30,9 +30,6 @@ class Organizer
       @book_arr[bookmark]
     when Symbol # Return array of values
       @tag_hash[bookmark]
-    # REVIEW: What's the point
-    # when Bookmark
-    #   @book_arr[@book_arr.index(bookmark)]
     else
       $stderr.puts "Wrong argument #{bookmark}"
     end
@@ -61,7 +58,7 @@ class Organizer
 
   def self.import(file_path)
     YAML.load(File.open(file_path, 'r'))
-    # rescue SyntaxError => error
-    #  puts "Could not parse YAML: #{error.message}"
+    rescue SyntaxError => error
+      puts "Could not parse YAML: #{error.message}"
   end
 end

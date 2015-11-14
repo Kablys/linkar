@@ -1,0 +1,35 @@
+--- !ruby/object:Organizer
+book_arr:
+- &1 !ruby/object:Bookmark
+  link: !ruby/object:Link
+    link: to.test
+    parts:
+      :protocol: 
+      :subdomain: to.
+      :top_level_domain: test
+      :filepath: 
+  name: YAML
+  tags:
+  - :export
+  - :yaml
+- &2 !ruby/object:Bookmark
+  link: !ruby/object:Link
+    link: ruby.org
+    parts:
+      :protocol: 
+      :subdomain: ruby.
+      :top_level_domain: org
+      :filepath: 
+  name: Ruby
+  tags:
+  - :ruby
+  - :org
+tag_hash:
+  :export: &3
+  - *1
+  - *1
+  - *2
+  - *2
+  :yaml: *3
+  :ruby: *3
+  :org: *3
