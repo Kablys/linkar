@@ -9,6 +9,7 @@ class Organizer
   end
 
   def add_bookmarks(bookmark)
+    puts 'reached bookmark limit' unless @book_arr.size < 100
     @book_arr << bookmark
     bookmark.tags.each do |tag|
       @tag_hash[tag] = @tag_hash[tag] << @book_arr.last
@@ -58,7 +59,5 @@ class Organizer
 
   def self.import(file_path)
     YAML.load(File.open(file_path, 'r'))
-    rescue SyntaxError => error
-      puts "Could not parse YAML: #{error.message}"
   end
 end

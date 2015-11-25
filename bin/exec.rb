@@ -45,9 +45,12 @@ loop do
     puts org.tags
   when '5' # Save bookmarks
     org.export('data.yml')
-  when '6' # Load bookmarks
-    org = Organizer.import('data.yml')
-      # REVIEW add exeptcion
+    when '6' # Load bookmarks
+    begin
+      org = Organizer.import('data.yml')
+    rescue SyntaxError => error
+      puts "Could not parse YAML: #{error.message}"
+    end
   #when '7' # Sort bookmarks
   when 'q'
     puts 'Goodbye'

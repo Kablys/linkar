@@ -9,8 +9,16 @@ require 'rspec/expectations'
 #                                                  betterspecs.
 #                                                  org
 #                                                  /#subject))
-RSpec::Matchers.define :matchdata_include do |*expected|
+RSpec::Matchers.define :matchdata_include do |expected|
   match do |actual|
-    actual.to_a == (expected)
+    expected.each_key do |key, value|
+      if key == -1
+        actual.pre_match == value
+      elsif key == actual.size
+        actual.post_match == value
+      else
+        actual[key] == value
+      end
+    end
   end
 end

@@ -7,14 +7,16 @@ describe Parser do
     end
     context 'given correct link' do
       it 'it returns correct' do
-        expect(link_part).to matchdata_include('http://www.betterspecs.org/#subject',
-                                               'http://',
-                                               'www.',
-                                               'betterspecs.org',
-                                               'betterspecs.',
-                                               'betterspecs.',
-                                               'org',
-                                               '/#subject')
+        expect(link_part).to matchdata_include(-1 => '',
+                                               0 => 'http://www.betterspecs.org/#subject',
+                                               1 => 'http://',
+                                               2 => 'www.',
+                                               3 => 'betterspecs.org',
+                                               4 => 'betterspecs.',
+                                               5 => 'betterspecs.',
+                                               6 => 'org',
+                                               7 => '/#subject',
+                                               8 => '')
       end
     end
     context 'given incorrect link' do
